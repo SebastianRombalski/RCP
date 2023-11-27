@@ -14,14 +14,20 @@ public class User {
     private String name;
     private String surname;
     private int EAN;
-    private int groupID;
+    private boolean adminOfGroup;
 
-    public User(String name, String surname, int EAN, int groupID) {
+    @ManyToOne
+    @JoinColumn(name="groupId")
+    private Group group;
+
+    public User(String name, String surname, int EAN,Group group, boolean adminOfGroup) {
         this.name = name;
         this.surname = surname;
         this.EAN = EAN;
-        this.groupID = groupID;
+        this.group=group;
+        this.adminOfGroup = adminOfGroup;
     }
+
 
     public User() {
     }
@@ -58,11 +64,12 @@ public class User {
         this.EAN = EAN;
     }
 
-    public int getGroupID() {
-        return groupID;
-    }
 
-    public void setGroupID(int groupID) {
-        this.groupID = groupID;
-    }
+    public Group getGroup() {return group;}
+
+    public void setGroup(Group group) {this.group = group;}
+
+    public boolean isAdminOfGroup() {return adminOfGroup;}
+
+    public void setAdminOfGroup(boolean adminOfGroup) {this.adminOfGroup = adminOfGroup;}
 }
