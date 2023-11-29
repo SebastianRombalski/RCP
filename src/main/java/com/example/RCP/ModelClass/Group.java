@@ -11,12 +11,9 @@ public class Group {
     private Long id;
 
     private String name;
-    private int groupId;
 
-
-    public Group(String name, int groupId) {
+    public Group(String name) {
         this.name = name;
-        this.groupId = groupId;
     }
 
 
@@ -39,12 +36,4 @@ public class Group {
         this.name = name;
     }
 
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
 }

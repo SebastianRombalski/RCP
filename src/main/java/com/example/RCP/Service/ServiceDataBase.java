@@ -27,8 +27,8 @@ public class ServiceDataBase {
 
     }
 
-    public void addGroup(String name, int groupId){
-        Group group = new Group(name, groupId);
+    public void addGroup(String name){
+        Group group = new Group(name);
         groupRepo.save(group);
     }
 
@@ -36,14 +36,24 @@ public class ServiceDataBase {
         groupRepo.save(group);
     }
 
+    public void addUser(User user){userRepo.save(user);}
+
     public void addUser(String name, String surname, int EAN, Group group, boolean adminOfGroup) {
         User user = new User(name, surname, EAN, group, adminOfGroup);
         userRepo.save(user);
     }
 
     public void addEventInProgress(Date date, User user){
-        EventInProgress eventInProgress = new EventInProgress(date, user);
-        eventInProgressRepo.save(eventInProgress);
+        long user_id = user.getId();
+        if(!eventInProgressRepo.existsById(user_id)) {
+            EventInProgress eventInProgress = new EventInProgress(date, user);
+            eventInProgressRepo.save(eventInProgress);
+        }
+        else {
+            Date dateEventInProgress = eventInProgressRepo.findById(user_id).get().getDate();
+            System.out.println(dateEventInProgress);
+            eventInProgressRepo.deleteById(user_id);
+        }
     }
     public void addEvent(Date dateStart, Date dateStop, User user){
         Event event = new Event(dateStart, dateStop, user);

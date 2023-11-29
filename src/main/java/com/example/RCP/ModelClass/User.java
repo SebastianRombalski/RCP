@@ -17,7 +17,7 @@ public class User {
     private boolean adminOfGroup;
 
     @ManyToOne
-    @JoinColumn(name="groupId")
+    @JoinColumn(name="group_id")
     private Group group;
 
     public User(String name, String surname, int EAN,Group group, boolean adminOfGroup) {
